@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1570478078249.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "3E0A033E",
+    "lastKnownWriteTime" : 139635517921304,
+    "last_content_update" : 1570478078249,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "CFB1F638",
+        "caption" : "ranger",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=ranger&cache_key=CFB1F638",
+        "displayedObservations" : "36",
+        "environment" : "",
+        "object" : "ranger",
+        "preview" : "0",
+        "totalObservations" : "36",
+        "variables" : "19"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

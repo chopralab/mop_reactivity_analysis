@@ -1,0 +1,512 @@
+read_csv("/storage/jonathan_fine/0062_mop_reactions/train36_predict14/fp1/results.csv") %>% gather(compound, prob, -cutoff) %>% spread(cutoff, prob)
+install.packages("irr")
+library(irr)
+kappa2
+?kappa
+?kappa2
+read_csv("/storage/jonathan_fine/0062_mop_reactions/train36_predict14/fp1/results.csv") %>% gather(compound, prob, -cutoff) %>% spread(cutoff, prob)
+read_csv("/storage/jonathan_fine/0062_mop_reactions/train36_predict14/fp1/results.csv") %>% gather(compound, prob, -cutoff) %>% spread(cutoff, prob) %>% filter(compound != "kappa", compound != "self_score")
+read_csv("/storage/jonathan_fine/0062_mop_reactions/train36_predict14/fp1/results.csv") %>% gather(compound, prob, -cutoff) %>% spread(cutoff, prob) %>% filter(compound != "kappa", compound != "self_score") -> dt1_res
+rm(results)
+dt1_res
+cohen.kappa
+install.packages("library(psych)")
+install.packages("psych")
+library(psych)
+cohen.kappa
+library(readr)
+set_bits_test <- read_csv("/storage/jonathan_fine/0062_mop_reactions/train36_predict14/fp1/set_bits_test.csv")
+View(set_bits_test)
+library(readr)
+test <- read_csv("/storage/jonathan_fine/0062_mop_reactions/train36_predict14/fp1/test.csv")
+View(test)
+cohen.kappa(data.frame(test$yield, dt1_res$`0.7`))
+cohen.kappa(data.frame(test$yield, dt1_res$`0.7` .> 0.5))
+cohen.kappa(data.frame(test$yield, dt1_res$`0.7` > 0.5))
+dt1_res$`0.7`
+dt1_res$`0.7` > 0.5)
+dt1_res$`0.7` > 0.5
+cohen.kappa(data.frame(test$yield == 1.0, dt1_res$`0.7` > 0.5))
+cohen.kappa(data.frame(test$yield == 1.0, dt1_res$`0.4` > 0.5))
+cohen.kappa(data.frame(test$yield == 1.0, dt1_res$`0.4` > 0.5))
+cohen.kappa(data.frame(test$yield == 1.0, dt1_res$`0.1` > 0.5))
+cohen.kappa(data.frame(test$yield == 1.0, dt1_res$`0.2` > 0.5))
+cohen.kappa(data.frame(test$yield == 1.0, dt1_res$`0.2` > 0.5)) -> derp
+derp$kappa
+read_csv("/storage/jonathan_fine/0062_mop_reactions/train36_predict14/fp1/results.csv") %>%
+select(-kappa, -self_score) %>% View
+read_csv("/storage/jonathan_fine/0062_mop_reactions/train36_predict14/fp1/results.csv") %>%
+select(-kappa, -self_score) %>%
+gather(compound, prob, -cutoff) %>%
+spread(cutoff, prob)
+read_csv("/storage/jonathan_fine/0062_mop_reactions/train36_predict14/fp1/results.csv") %>%
+select(-kappa, -self_score) %>%
+gather(compound, prob, -cutoff) %>%
+spread(cutoff, prob) %>%
+summarise_if(is.numeric, list(a = cohen.kappa(data.frame(test$yield == 1.0, .))))
+read_csv("/storage/jonathan_fine/0062_mop_reactions/train36_predict14/fp1/results.csv") -> dt1_res
+dt1_res %>%
+select(-kappa, -self_score) %>%
+gather(compound, prob, -cutoff) %>%
+spread(cutoff, prob)
+dt1_res %>%
+select(-kappa, -self_score) %>%
+gather(compound, prob, -cutoff) %>%
+spread(cutoff, prob) %>%
+summarise_if(is.numeric, list(a = cohen.kappa(data.frame(test$yield == 1.0, .))))
+dt1_res %>%
+select(-kappa, -self_score) %>%
+gather(compound, prob, -cutoff) %>%
+spread(cutoff, prob) -> grr
+cohen.kappa(data.frame(test$yield == 1.0, grr$`0.2` > 0.5))
+cohen.kappa(data.frame(test$yield == 1.0, grr$`0.3` > 0.5))
+cohen.kappa(data.frame(test$yield == 1.0, grr$`0.4` > 0.5))
+cohen.kappa(data.frame(test$yield == 1.0, grr$`0.5` > 0.5))
+cohen.kappa(data.frame(test$yield == 1.0, grr$`0.6` > 0.5))
+cohen.kappa(data.frame(test$yield == 1.0, grr$`0.7` > 0.5))
+cohen.kappa(data.frame(test$yield == 1.0, grr$`0.8` > 0.5))
+cohen.kappa(data.frame(test$yield == 1.0, grr$`0.9` > 0.5))
+View(dt1_res)
+dt1_res %>%
+select(-kappa, -self_score) %>%
+gather(compound, prob, -cutoff) %>%
+spread(cutoff, prob) %>%
+summarise_if(is.numeric, list(a = cohen.kappa(data.frame(test$yield == 1.0, .))))
+dt1_res %>%
+select(-kappa, -self_score) %>%
+gather(compound, prob, -cutoff) %>%
+spread(cutoff, prob) %>%
+summarise_if(is.numeric, funs(cohen.kappa(data.frame(test$yield == 1.0, .))))
+dt1_res %>%
+select(-kappa, -self_score) %>%
+gather(compound, prob, -cutoff) %>%
+spread(cutoff, prob) %>%
+summarise_if(is.numeric, funs(cohen.kappa(data.frame(test$yield == 1.0, . > 0.5))))
+dt1_res %>%
+select(-kappa, -self_score) %>%
+gather(compound, prob, -cutoff) %>%
+spread(cutoff, prob) %>%
+mutate_if(is.numeric, funs(cohen.kappa(data.frame(test$yield == 1.0, . > 0.5))))
+dt1_res %>%
+select(-kappa, -self_score) %>%
+gather(compound, prob, -cutoff) %>%
+spread(cutoff, prob) %>%
+mutate_if(is.numeric, funs(cohen.kappa(data.frame(test$yield == 1.0, . > 0.5))$kappa ) )
+dt1_res %>%
+select(-kappa, -self_score) %>%
+gather(compound, prob, -cutoff) %>%
+spread(cutoff, prob) %>%
+summarize_if(is.numeric, funs(cohen.kappa(data.frame(test$yield == 1.0, . > 0.5))$kappa ) )
+dt1_res %>%
+select(-kappa, -self_score) %>%
+gather(compound, prob, -cutoff) %>%
+spread(cutoff, prob) ->
+dt1_res
+dt1_res %>%
+summarize_if(is.numeric, funs(cohen.kappa(data.frame(test$yield == 1.0, . > 0.5))$kappa ) ) %>%
+mutate(cutoff = "kappa") %>%
+rbind(dt1_res)
+dt1_res %>%
+summarize_if(is.numeric, funs(cohen.kappa(data.frame(test$yield == 1.0, . > 0.5))$kappa ) ) %>%
+mutate(cutoff = "kappa")
+View(dt1_res)
+dt1_res %>%
+summarize_if(is.numeric, funs(cohen.kappa(data.frame(test$yield == 1.0, . > 0.5))$kappa ) ) %>%
+mutate(compound = "kappa") %>%
+rbind(dt1_res)
+dt1_res %>%
+summarize_if(is.numeric, funs(cohen.kappa(data.frame(test$yield == 1.0, . > 0.5))$kappa ) ) %>%
+mutate(compound = "kappa") %>%
+rbind(dt1_res) %>%
+write_csv("dt1_res.csv")
+process_dt_data <- function(input, output) {
+read_csv(input) -> dt_res
+dt_res %>%
+select(-kappa, -self_score) %>%
+gather(compound, prob, -cutoff) %>%
+spread(cutoff, prob) ->
+dt_res
+dt_res %>%
+summarize_if(is.numeric, funs(cohen.kappa(data.frame(test$yield == 1.0, . > 0.5))$kappa ) ) %>%
+mutate(compound = "kappa") %>%
+rbind(dt1_res) %>%
+write_csv(output)
+}
+process_dt_data("/storage/jonathan_fine/0062_mop_reactions/train36_predict14/fp1/results.csv", "dt1_res.csv")
+process_dt_data("/storage/jonathan_fine/0062_mop_reactions/train36_predict14/fp2/results.csv", "dt2_res.csv")
+process_dt_data("/storage/jonathan_fine/0062_mop_reactions/train36_predict14/fp3/results.csv", "dt3_res.csv")
+process_dt_data("/storage/jonathan_fine/0062_mop_reactions/train36_predict14/fp0/results.csv", "dt0_res.csv")
+rm(dt1_res)
+rm(grr)
+rm(tune_grid)
+rm(test, best)
+rm(both, derp)
+rm(grrr)
+rm(model, maybe)
+rm(reglog_2)
+fp0 <- read_csv("../train36_predict14/fp0/set_bits.csv") %>% mutate_if(is.character, as.logical)
+fp1 <- read_csv("../train36_predict14/fp1/set_bits.csv") %>% mutate_if(is.character, as.logical)
+fp2 <- read_csv("../train36_predict14/fp2/set_bits.csv") %>% mutate_if(is.character, as.logical)
+fp3 <- read_csv("../train36_predict14/fp3/set_bits.csv") %>% mutate_if(is.character, as.logical)
+read_csv("../train36_predict14/fp0/set_bits_test.csv") %>% mutate_all(as.logical)-> sb_test_fp0
+read_csv("../train36_predict14/fp1/set_bits_test.csv") %>% mutate_all(as.logical)-> sb_test_fp1
+read_csv("../train36_predict14/fp2/set_bits_test.csv") %>% mutate_all(as.logical)-> sb_test_fp2
+read_csv("../train36_predict14/fp3/set_bits_test.csv") %>% mutate_all(as.logical)-> sb_test_fp3
+test_model <- function(fp, sb, method = "regLogistic") {
+mclapply(seq(0.1, 0.9, 0.1), mc.cores = 9, function(X) {
+train(factor(yield) ~ .,
+data = fp %>% mutate(yield = yield > X),
+trControl = tc,
+method = method
+) -> model
+pred = predict(model, sb, type = "prob")[,2]
+pred_self = mean(predict(model, fp) == (fp$yield > X))
+tibble(method = method, cutoff = X, kappa = model$results$Kappa %>% max(),
+c01 = pred[01], c02 = pred[02], c03 = pred[03], c04 = pred[04], c05 = pred[05],
+c06 = pred[06], c07 = pred[07], c08 = pred[08], c09 = pred[09], c10 = pred[10],
+c11 = pred[11], c12 = pred[12], c13 = pred[13], c14 = pred[14],
+self_score = pred_self
+)
+}) %>% bind_rows()
+}
+test_all_fp_models <- function(method = "regLogistic") {
+fp0_res = test_model(fp0, sb_test_fp0, method) %>% mutate(fp = "fp0")
+fp1_res = test_model(fp1, sb_test_fp1, method) %>% mutate(fp = "fp1")
+fp2_res = test_model(fp2, sb_test_fp2, method) %>% mutate(fp = "fp2")
+fp3_res = test_model(fp3, sb_test_fp3, method) %>% mutate(fp = "fp3")
+bind_rows(fp0_res, fp1_res, fp2_res, fp3_res)
+}
+set.seed(12345)
+reglog = test_all_fp_models()
+View(reglog)
+?train
+set.seed(12345)
+test_all_fp_models("knn")
+knn <- .Last.value
+test_all_fp_models("lasso")
+getModelInfo()
+getModelInfo("lasso")
+test_all_fp_models("glm")
+glm < .Last.value
+.Last.value
+glm <- .Last.value
+test_all_fp_models("pls")
+View(glm)
+test_all_fp_models("pls")
+pls <- .Last.value
+View(pls)
+pca <- test_all_fp_models("pca")
+mlp <- test_all_fp_models("mlp")
+View(glm)
+View(glm)
+glm %>% select(-kappa, -self_score, -method) %>% gather(compound, prob, -cutoff)
+glm %>% select(-kappa, -self_score, -method) %>% gather(compound, prob, -cutoff, -fp)
+dt_res
+dt1_res
+View(dt0)
+dt0 %>%
+select(-kappa, -self_score) %>%
+gather(compound, prob, -cutoff) %>%
+spread(cutoff, prob)
+glm %>% select(-kappa, -self_score, -method) %>% gather(compound, prob, -cutoff, -fp) %>% spread(cutoff, prob)
+glm %>% select(-kappa, -self_score, -method) %>% gather(compound, prob, -cutoff, -fp) %>% spread(cutoff, prob) %>% group_by(fp) %>% summarise_if(is.numeric, funs(cohen.kappa(data.frame(test$yield == 1.0, . > 0.5))$kappa ))
+test
+savehistory()
+test <- read_csv("/storage/jonathan_fine/0062_mop_reactions/train36_predict14/fp1/test.csv")
+glm %>% select(-kappa, -self_score, -method) %>% gather(compound, prob, -cutoff, -fp) %>% spread(cutoff, prob) %>% group_by(fp) %>% summarise_if(is.numeric, funs(cohen.kappa(data.frame(test$yield == 1.0, . > 0.5))$kappa ))
+glm %>% select(-kappa, -self_score, -method) %>% gather(compound, prob, -cutoff, -fp) %>% spread(cutoff, prob) %>% group_by(fp)
+process_caret_data <- function(input) {
+input %>%
+select(-kappa, -self_score, -method) %>%
+gather(compound, prob, -cutoff, -fp) %>%
+spread(cutoff, prob) ->
+input_res
+input_res %>%
+group_by(fp) %>%
+summarise_if(is.numeric, funs(cohen.kappa(data.frame(test$yield == 1.0, . > 0.5))$kappa )) %>%
+mutate(compound = "kappa") %>%
+rbind(input_res)
+}
+process_caret_data(glm)
+process_caret_data(pls)
+process_caret_data(reglog)
+process_caret_data(reglog) %>% View
+process_caret_data <- function(input) {
+input %>%
+select(-kappa, -self_score, -method) %>%
+gather(compound, prob, -cutoff, -fp) %>%
+spread(cutoff, prob) ->
+input_res
+input_res %>%
+group_by(fp) %>%
+summarise_if(is.numeric, funs(cohen.kappa(data.frame(test$yield == 1.0, . > 0.5))$kappa )) %>%
+mutate(compound = "kappa") %>%
+rbind(input_res) %>%
+arrange(fp, compound)
+}
+process_caret_data(reglog) %>% View
+process_caret_data(knn) %>% View
+process_caret_data(reglog) %>% View
+train(factor(yield) ~., fp0 %>% mutate(yield > 0.5))
+train(factor(yield) ~., fp0 %>% mutate(yield = yield > 0.5))
+train(factor(yield) ~., fp0 %>% mutate(yield = yield > 0.5), trControl = tc)
+train(factor(yield) ~., fp0 %>% mutate(yield = yield > 0.5), trControl = tc, method = "regLogistic")
+train(factor(yield) ~., fp0 %>% mutate(yield = yield >= 0.5), trControl = tc, method = "regLogistic")
+process_caret_data(reglog) %>% write_csv("reglog.csv")
+process_caret_data(glm) %>% write_csv("glm.csv")
+process_caret_data(pls) %>% write_csv("pls.csv")
+process_caret_data(knn) %>% write_csv("knn.csv")
+View(dt1)
+process_dt_data("../train36_predict14/fp0/results.csv", "dt0_res.csv")
+process_dt_data <- function(input, output) {
+read_csv(input) -> dt_res
+dt_res %>%
+select(-kappa, -self_score) %>%
+gather(compound, prob, -cutoff) %>%
+spread(cutoff, prob) ->
+dt_res
+dt_res %>%
+summarize_if(is.numeric, funs(cohen.kappa(data.frame(test$yield == 1.0, . > 0.5))$kappa ) ) %>%
+mutate(compound = "kappa") %>%
+rbind(dt_res) %>%
+write_csv(output)
+}
+process_dt_data("../train36_predict14/fp0/results.csv", "dt0_res.csv")
+process_dt_data("../train36_predict14/fp1/results.csv", "dt1_res.csv")
+process_dt_data("../train36_predict14/fp2/results.csv", "dt2_res.csv")
+process_dt_data("../train36_predict14/fp3/results.csv", "dt3_res.csv")
+process_dt_data <- function(input) {
+read_csv(input) -> dt_res
+dt_res %>%
+select(-kappa, -self_score) %>%
+gather(compound, prob, -cutoff) %>%
+spread(cutoff, prob) ->
+dt_res
+dt_res %>%
+summarize_if(is.numeric, funs(cohen.kappa(data.frame(test$yield == 1.0, . > 0.5))$kappa ) ) %>%
+mutate(compound = "kappa") %>%
+rbind(dt_res)
+}
+process_dt_data("../train36_predict14/fp3/results.csv")
+process_dt_data("../train36_predict14/fp1/results.csv")
+process_dt_data("../train36_predict14/fp0/results.csv")
+process_dt_data("../train36_predict14/fp1/results.csv")
+process_dt_data("../train36_predict14/fp3/results.csv")
+process_dt_data("../train36_predict14/fp2/results.csv")
+process_dt_data("../train36_predict14/fp1/results.csv")
+fp0 <- read_csv("../train36_predict14/fp0/set_bits.csv") %>% mutate_if(is.character, as.logical)
+fp1 <- read_csv("../train36_predict14/fp1/set_bits.csv") %>% mutate_if(is.character, as.logical)
+fp2 <- read_csv("../train36_predict14/fp2/set_bits.csv") %>% mutate_if(is.character, as.logical)
+fp3 <- read_csv("../train36_predict14/fp3/set_bits.csv") %>% mutate_if(is.character, as.logical)
+read_csv("../train36_predict14/fp0/set_bits_test.csv") %>% mutate_all(as.logical)-> sb_test_fp0
+read_csv("../train36_predict14/fp1/set_bits_test.csv") %>% mutate_all(as.logical)-> sb_test_fp1
+read_csv("../train36_predict14/fp2/set_bits_test.csv") %>% mutate_all(as.logical)-> sb_test_fp2
+read_csv("../train36_predict14/fp3/set_bits_test.csv") %>% mutate_all(as.logical)-> sb_test_fp3
+set.seed(12345)
+reglog = test_all_fp_models()
+library(parallel)
+test_model <- function(fp, sb, method = "regLogistic") {
+mclapply(seq(0.1, 0.9, 0.1), mc.cores = 9, function(X) {
+train(factor(yield) ~ .,
+data = fp %>% mutate(yield = yield > X),
+trControl = tc,
+method = method
+) -> model
+pred = predict(model, sb, type = "prob")[,2]
+pred_self = mean(predict(model, fp) == (fp$yield > X))
+tibble(method = method, cutoff = X, kappa = model$results$Kappa %>% max(),
+c01 = pred[01], c02 = pred[02], c03 = pred[03], c04 = pred[04], c05 = pred[05],
+c06 = pred[06], c07 = pred[07], c08 = pred[08], c09 = pred[09], c10 = pred[10],
+c11 = pred[11], c12 = pred[12], c13 = pred[13], c14 = pred[14],
+self_score = pred_self
+)
+}) %>% bind_rows()
+}
+test_all_fp_models <- function(method = "regLogistic") {
+print("FP0")
+fp0_res = test_model(fp0, sb_test_fp0, method) %>% mutate(fp = "fp0")
+print("FP1")
+fp1_res = test_model(fp1, sb_test_fp1, method) %>% mutate(fp = "fp1")
+print("FP2")
+fp2_res = test_model(fp2, sb_test_fp2, method) %>% mutate(fp = "fp2")
+print("FP3")
+fp3_res = test_model(fp3, sb_test_fp3, method) %>% mutate(fp = "fp3")
+bind_rows(fp0_res, fp1_res, fp2_res, fp3_res)
+}
+set.seed(12345)
+reglog = test_all_fp_models()
+knn <- test_all_fp_models("knn")
+View(reglog)
+process_caret_data(reglog)
+process_caret_data(reglog) %>% View
+test_all_fp_models <- function(method = "regLogistic") {
+set.seed(12345)
+print("FP0")
+fp0_res = test_model(fp0, sb_test_fp0, method) %>% mutate(fp = "fp0")
+print("FP1")
+fp1_res = test_model(fp1, sb_test_fp1, method) %>% mutate(fp = "fp1")
+print("FP2")
+fp2_res = test_model(fp2, sb_test_fp2, method) %>% mutate(fp = "fp2")
+print("FP3")
+fp3_res = test_model(fp3, sb_test_fp3, method) %>% mutate(fp = "fp3")
+bind_rows(fp0_res, fp1_res, fp2_res, fp3_res)
+}
+glm <- test_all_fp_models("glm")
+pls <- test_all_fp_models("pls")
+process_caret_data(pls) %>% View
+knn <- test_all_fp_models("knn")
+svm <- test_all_fp_models("rf")
+process_caret_data(svm) %>% View
+svm %>% View
+svm <- test_all_fp_models("ranger")
+dt_rp <- test_all_fp_models("rpart")
+process_caret_data(dt_rp) %>% View
+dt_rp <- test_all_fp_models("svmRadial")
+?train
+reglog = test_all_fp_models()
+knn <- test_all_fp_models("knn")
+ranger <- test_all_fp_models("ranger")
+ranger <- test_all_fp_models("rf")
+ranger <- test_all_fp_models("rf")
+View(ranger)
+process_caret_data(ranger)
+process_caret_data(ranger) %>% View
+View(reglog)
+process_caret_data(reglog) %>% View
+?rf
+?random.forest
+?randomforest
+??randomforest
+process_caret_data(ranger) %>% View
+fp0 %>%
+ggplot(aes(yield)) +
+geom_histogram(binwidth = 0.11) +
+geom_histogram(binwidth = .01, fill = "blue") +
+scale_x_continuous(breaks = c(0.0,0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)) +
+scale_y_continuous(breaks = seq(1,16), expand = c(0,0)) +
+geom_vline(xintercept = 0.7) +
+geom_vline(xintercept = 0.4)
+fp0 %>%
+ggplot(aes(yield)) +
+geom_histogram(binwidth = 0.11) +
+geom_histogram(binwidth = .01, fill = "blue") +
+scale_x_continuous(breaks = c(0.0,0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)) +
+scale_y_continuous(breaks = seq(1,17), expand = c(0,0)) +
+geom_vline(xintercept = 0.7) +
+geom_vline(xintercept = 0.4)
+fp0 %>%
+ggplot(aes(yield)) +
+geom_histogram(binwidth = 0.11) +
+geom_histogram(binwidth = .01, fill = "blue") +
+scale_x_continuous(breaks = c(0.0,0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0)) +
+scale_y_continuous(breaks = seq(1,17), expand = c(0,0)) +
+geom_vline(xintercept = 0.7) +
+geom_vline(xintercept = 0.4)
+View(rf_res)
+train(factor(yield) ~ ., data = fp1 %>% mutate(yield = yield > 0.7), tcControl = tc, method = "rf")
+train(factor(yield) ~ ., data = fp1 %>% mutate(yield = yield > 0.4), tcControl = tc, method = "rf")
+train(factor(yield) ~ ., data = fp1 %>% mutate(yield = yield > 0.4), tcControl = tc, method = "rf")
+process_caret_data(ranger) %>% View
+View(ranger)
+train(factor(yield) ~ ., data = fp1 %>% mutate(yield = yield > 0.4), tcControl = tc, method = "rf")
+tc
+train(factor(yield) ~ ., data = fp1 %>% mutate(yield = yield > 0.4), tcControl = tc, method = "rf")
+train(factor(yield) ~ ., data = fp1 %>% mutate(yield = yield > 0.4), tcControl = tc, method = "rf")
+train(factor(yield) ~ ., data = fp1 %>% mutate(yield = yield > 0.4), tcControl = trainControl("loocv"), method = "rf")
+train(factor(yield) ~ ., data = fp1 %>% mutate(yield = yield > 0.4), trControl = trainControl("loocv"), method = "rf")
+train(factor(yield) ~ ., data = fp1 %>% mutate(yield = yield > 0.4), trControl = trainControl("loocv"), method = "rf")
+.Last.value$results$Kappa
+train(factor(yield) ~ ., data = fp1 %>% mutate(yield = yield > 0.4), trControl = tc, method = "rf")
+train(factor(yield) ~ ., data = fp1 %>% mutate(yield = yield > 0.4), trControl = tc, method = "rf")
+train(factor(yield) ~ ., data = fp1 %>% mutate(yield = yield > 0.4), trControl = trainControl("loocv"), method = "rf")
+train(factor(yield) ~ ., data = fp1 %>% mutate(yield = yield > 0.4), trControl = trainControl("LOOCV"), method = "rf")
+train(factor(yield) ~ ., data = fp1 %>% mutate(yield = yield > 0.4), trControl = trainControl("loocv"), method = "rf")
+trainControl("loocv")
+trainControl("LOOCV")
+reglog = test_all_fp_models()
+fp0 <- read_csv("../train36_predict14/fp0/set_bits.csv") %>% mutate_if(is.character, as.logical)
+fp1 <- read_csv("../train36_predict14/fp1/set_bits.csv") %>% mutate_if(is.character, as.logical)
+fp2 <- read_csv("../train36_predict14/fp2/set_bits.csv") %>% mutate_if(is.character, as.logical)
+fp3 <- read_csv("../train36_predict14/fp3/set_bits.csv") %>% mutate_if(is.character, as.logical)
+read_csv("../train36_predict14/fp0/set_bits_test.csv") %>% mutate_all(as.logical)-> sb_test_fp0
+read_csv("../train36_predict14/fp1/set_bits_test.csv") %>% mutate_all(as.logical)-> sb_test_fp1
+read_csv("../train36_predict14/fp2/set_bits_test.csv") %>% mutate_all(as.logical)-> sb_test_fp2
+read_csv("../train36_predict14/fp3/set_bits_test.csv") %>% mutate_all(as.logical)-> sb_test_fp3
+reglog = test_all_fp_models()
+reglog = test_all_fp_models()
+process_dt_data("../train36_predict14/fp3/results.csv")
+process_dt_data("../train36_predict14/fp1/results.csv")
+process_dt_data("../train36_predict14/fp1/results.csv") %>% write_csv("dt1_res.csv")
+reglog = test_all_fp_models()
+knn <- test_all_fp_models("knn")
+glm <- test_all_fp_models("glm")
+pls <- test_all_fp_models("pls")
+pls <- test_all_fp_models("pls")
+process_dt_data("../train36_predict14/fp0/results.csv") %>% write_csv("dt0_res.csv")
+process_dt_data("../train36_predict14/fp2/results.csv") %>% write_csv("dt2_res.csv")
+process_dt_data("../train36_predict14/fp3/results.csv") %>% write_csv("dt3_res.csv")
+pls <- test_all_fp_models("pls")
+pls <- test_all_fp_models("pls")
+pls <- test_all_fp_models("pls")
+pls <- test_all_fp_models("pls")
+library(parallel)
+library(tidyverse)
+library(caret)
+pls <- test_all_fp_models("pls")
+knn <- test_all_fp_models("knn")
+process_caret_data(pls)
+library(psych)
+process_caret_data(pls)
+process_caret_data(pls) %>% View
+knn <- test_all_fp_models("knn")
+knn <- test_all_fp_models("knn")
+knn <- test_all_fp_models("knn")
+View(pls)
+process_caret_data(pls)
+process_caret_data(pls) %>% View
+process_caret_data(reglog) %>% View
+process_caret_data(knn)
+process_caret_data(knn) %>% select(compound, everything())
+process_caret_data(glm) %>% select(compound, everything())
+process_caret_data(pls) %>% select(compound, everything())
+process_caret_data(pls) %>% select(compound, everything()) %>% View
+process_caret_data(pls) %>% select(compound, everything()) %>% select(-`0.8`) %>% View
+process_caret_data(reglog) %>% select(compound, everything()) %>% select(-`0.8`) %>% View
+process_caret_data(reglog) %>% select(compound, everything()) %>% select(-`0.8`) %>% write_csv("reglog.csv")
+process_caret_data(glm) %>% select(compound, everything()) %>% select(-`0.8`) %>% write_csv("glm.csv")
+process_caret_data(pls) %>% select(compound, everything()) %>% select(-`0.8`) %>% write_csv("pls.csv")
+process_caret_data(knn) %>% select(compound, everything()) %>% select(-`0.8`) %>% write_csv("knn.csv")
+process_caret_data(ranger)
+process_caret_data(ranger) %>% View
+library(rpart)
+rpart(yield ~ ., fp1 %>% mutate(yield = factor(yield > 0.7)))
+rpart(yield ~ ., fp1 %>% mutate(yield = factor(yield > 0.6)))
+rpart(yield ~ ., fp1 %>% mutate(yield = factor(yield > 0.7)), cp = 1)
+rpart(yield ~ ., fp1 %>% mutate(yield = factor(yield > 0.7)), cp = -1)
+rpart(yield ~ ., fp1 %>% mutate(yield = factor(yield > 0.4)), cp = -1)
+library(rpart.plot)
+rpart(yield ~ ., fp1 %>% mutate(yield = factor(yield > 0.4)), cp = -1) %>% rpart.plot()
+rpart(yield ~ ., fp1 %>% mutate(yield = factor(yield > 0.4)), cp = -1, minspit = 5) %>% rpart.plot()
+rpart(yield ~ ., fp1 %>% mutate(yield = factor(yield > 0.4)), cp = -1, minsplit = 5) %>% rpart.plot()
+rpart(yield ~ ., fp1 %>% mutate(yield = factor(yield > 0.4)), cp = -1, minsplit = 5)
+rpart(yield ~ ., fp1 %>% mutate(yield = factor(yield > 0.4)), cp = -1, minsplit = 5) %>% rpart.plot()
+rpart(yield ~ ., fp1 %>% mutate(yield = factor(yield > 0.4)), cp = -1, minsplit = 5, model = T) %>% rpart.plot()
+rpart(yield ~ ., fp1 %>% mutate(yield = factor(yield > 0.4)), cp = -1, minsplit = 6, model = T) %>% rpart.plot()
+rpart(yield ~ ., fp1 %>% mutate(yield = factor(yield > 0.4)), cp = -1, minsplit = 9, model = T) %>% rpart.plot()
+rpart(yield ~ ., fp1 %>% mutate(yield = factor(yield > 0.4)), minsplit = 9, model = T) %>% rpart.plot()
+rpart(yield ~ ., fp1 %>% mutate(yield = factor(yield > 0.4)), cp = -1, minsplit = 9, model = T) %>% rpart.plot()
+.17 * 36
+.166 * 36
+.167 * 36
+process_dt_data("../train36_predict14/fp2/results.csv")
+process_dt_data("../train36_predict14/fp0/results.csv")
+process_dt_data("../train36_predict14/fp0/results.csv") %>% rbind(process_dt_data("../train36_predict14/fp1/results.csv")) %>% rbind(process_dt_data("../train36_predict14/fp2/results.csv")) %>% rbind(process_dt_data("../train36_predict14/fp3/results.csv"))
+process_dt_data("../train36_predict14/fp0/results.csv") %>% rbind(process_dt_data("../train36_predict14/fp1/results.csv")) %>% rbind(process_dt_data("../train36_predict14/fp2/results.csv")) %>% rbind(process_dt_data("../train36_predict14/fp3/results.csv")) %>% select(-`0.8`) %>% select(compound, everything())
+process_dt_data("../train36_predict14/fp0/results.csv") %>% rbind(process_dt_data("../train36_predict14/fp1/results.csv")) %>% rbind(process_dt_data("../train36_predict14/fp2/results.csv")) %>% rbind(process_dt_data("../train36_predict14/fp3/results.csv")) %>% select(-`0.8`) %>% select(compound, everything()) %>% View
+process_dt_data("../train36_predict14/fp0/results.csv") %>% mutate(fp =0) %>% rbind(process_dt_data("../train36_predict14/fp1/results.csv") %>% mutate(fp = 1)) %>% rbind(process_dt_data("../train36_predict14/fp2/results.csv") %>% mutate(fp=2)) %>% rbind(process_dt_data("../train36_predict14/fp3/results.csv") %>% mutate(fp=3)) %>% select(-`0.8`) %>% select(compound, everything()) %>% View
+process_dt_data("../train36_predict14/fp0/results.csv") %>% mutate(fp =0) %>% rbind(process_dt_data("../train36_predict14/fp1/results.csv") %>% mutate(fp = 1)) %>% rbind(process_dt_data("../train36_predict14/fp2/results.csv") %>% mutate(fp=2)) %>% rbind(process_dt_data("../train36_predict14/fp3/results.csv") %>% mutate(fp=3)) %>% select(-`0.8`) %>% select(compound, fp, everything()) %>% arrange(compound)
+process_dt_data("../train36_predict14/fp0/results.csv") %>% mutate(fp =0) %>% rbind(process_dt_data("../train36_predict14/fp1/results.csv") %>% mutate(fp = 1)) %>% rbind(process_dt_data("../train36_predict14/fp2/results.csv") %>% mutate(fp=2)) %>% rbind(process_dt_data("../train36_predict14/fp3/results.csv") %>% mutate(fp=3)) %>% select(-`0.8`) %>% select(compound, fp, everything()) %>% group_by(fp) %>% arrange(compound)
+process_dt_data("../train36_predict14/fp0/results.csv") %>% mutate(fp =0) %>% rbind(process_dt_data("../train36_predict14/fp1/results.csv") %>% mutate(fp = 1)) %>% rbind(process_dt_data("../train36_predict14/fp2/results.csv") %>% mutate(fp=2)) %>% rbind(process_dt_data("../train36_predict14/fp3/results.csv") %>% mutate(fp=3)) %>% select(-`0.8`) %>% select(compound, fp, everything()) %>% group_by(fp) %>% arrange(compound) %>% View
+process_dt_data("../train36_predict14/fp0/results.csv") %>% mutate(fp =0) %>% rbind(process_dt_data("../train36_predict14/fp1/results.csv") %>% mutate(fp = 1)) %>% rbind(process_dt_data("../train36_predict14/fp2/results.csv") %>% mutate(fp=2)) %>% rbind(process_dt_data("../train36_predict14/fp3/results.csv") %>% mutate(fp=3)) %>% select(-`0.8`) %>% select(compound, fp, everything()) %>% arrange(fp, compound)
+process_dt_data("../train36_predict14/fp0/results.csv") %>% mutate(fp =0) %>% rbind(process_dt_data("../train36_predict14/fp1/results.csv") %>% mutate(fp = 1)) %>% rbind(process_dt_data("../train36_predict14/fp2/results.csv") %>% mutate(fp=2)) %>% rbind(process_dt_data("../train36_predict14/fp3/results.csv") %>% mutate(fp=3)) %>% select(-`0.8`) %>% select(compound, fp, everything()) %>% arrange(fp, compound) %>% View
+process_dt_data("../train36_predict14/fp0/results.csv") %>% mutate(fp =0) %>% rbind(process_dt_data("../train36_predict14/fp1/results.csv") %>% mutate(fp = 1)) %>% rbind(process_dt_data("../train36_predict14/fp2/results.csv") %>% mutate(fp=2)) %>% rbind(process_dt_data("../train36_predict14/fp3/results.csv") %>% mutate(fp=3)) %>% select(-`0.8`) %>% select(compound, fp, everything()) %>% arrange(fp, compound) %>% write_csv("dt.csv")

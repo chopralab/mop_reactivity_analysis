@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "library(tidyverse)\nlibrary(parallel)\n\nfp0 <- read_csv(\"../train36_predict14/fp0/set_bits.csv\") %>% mutate_if(is.character, as.logical)\nfp1 <- read_csv(\"../train36_predict14/fp1/set_bits.csv\") %>% mutate_if(is.character, as.logical)\nfp2 <- read_csv(\"../train36_predict14/fp2/set_bits.csv\") %>% mutate_if(is.character, as.logical)\nfp3 <- read_csv(\"../train36_predict14/fp3/set_bits.csv\") %>% mutate_if(is.character, as.logical)\n\nread_csv(\"../train36_predict14/fp0/set_bits_test.csv\") %>% mutate_all(as.logical)-> sb_test_fp0\nread_csv(\"../train36_predict14/fp1/set_bits_test.csv\") %>% mutate_all(as.logical)-> sb_test_fp1\nread_csv(\"../train36_predict14/fp2/set_bits_test.csv\") %>% mutate_all(as.logical)-> sb_test_fp2\nread_csv(\"../train36_predict14/fp3/set_bits_test.csv\") %>% mutate_all(as.logical)-> sb_test_fp3\n\ntest_model <- function(fp, sb, method = \"regLogistic\") {\n  mclapply(seq(0.1, 0.9, 0.1), mc.cores = 9, function(X) {\n    \n    train(factor(yield) ~ .,\n          data = fp %>% mutate(yield = yield > X),\n          trControl = tc,\n          method = method\n    ) -> model\n    \n    pred = predict(model, sb, type = \"prob\")[,2]\n    pred_self = mean(predict(model, fp) == (fp$yield > X))\n    \n    tibble(method = method, cutoff = X, kappa = model$results$Kappa %>% max(),\n      c01 = pred[01], c02 = pred[02], c03 = pred[03], c04 = pred[04], c05 = pred[05],\n      c06 = pred[06], c07 = pred[07], c08 = pred[08], c09 = pred[09], c10 = pred[10],\n      c11 = pred[11], c12 = pred[12], c13 = pred[13], c14 = pred[14],\n      self_score = pred_self\n    )\n  }) %>% bind_rows()\n}\n\ntest_all_fp_models <- function(method = \"regLogistic\") {\n  set.seed(12345)\n  \n  print(\"FP0\")\n  fp0_res = test_model(fp0, sb_test_fp0, method) %>% mutate(fp = \"fp0\")\n  \n  print(\"FP1\")\n  fp1_res = test_model(fp1, sb_test_fp1, method) %>% mutate(fp = \"fp1\")\n  \n  print(\"FP2\")\n  fp2_res = test_model(fp2, sb_test_fp2, method) %>% mutate(fp = \"fp2\")\n  \n  print(\"FP3\")\n  fp3_res = test_model(fp3, sb_test_fp3, method) %>% mutate(fp = \"fp3\")\n  \n  bind_rows(fp0_res, fp1_res, fp2_res, fp3_res)\n}\n\nreglog = test_all_fp_models()\nknn <- test_all_fp_models(\"knn\")\nglm <- test_all_fp_models(\"glm\")\npls <- test_all_fp_models(\"pls\")\n\nfp0 %>%\n  ggplot(aes(yield)) +\n  geom_histogram(binwidth = 0.11) +\n  geom_histogram(binwidth = .01, fill = \"blue\") +\n  scale_x_continuous(breaks = c(0.0,0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0)) +\n  scale_y_continuous(breaks = seq(1,17), expand = c(0,0)) +\n  geom_vline(xintercept = 0.7) +\n  geom_vline(xintercept = 0.4)\n\nprocess_dt_data <- function(input) {\n  read_csv(input) -> dt_res\n  \n  dt_res %>%\n    select(-kappa, -self_score) %>%\n    gather(compound, prob, -cutoff) %>%\n    spread(cutoff, prob) ->\n    dt_res\n  \n  dt_res %>% \n    summarize_if(is.numeric, funs(cohen.kappa(data.frame(test$yield == 1.0, . > 0.5))$kappa ) ) %>%\n    mutate(compound = \"kappa\") %>%\n    rbind(dt_res)\n}\n\nprocess_caret_data <- function(input) {\n  input %>%\n    select(-kappa, -self_score, -method) %>%\n    gather(compound, prob, -cutoff, -fp) %>%\n    spread(cutoff, prob) ->\n    input_res\n\n  input_res %>%\n    group_by(fp) %>%\n    summarise_if(is.numeric, funs(cohen.kappa(data.frame(test$yield == 1.0, . > 0.5))$kappa )) %>%\n    mutate(compound = \"kappa\") %>%\n    rbind(input_res) %>%\n    arrange(fp, compound)\n}\n",
+    "created" : 1569001632394.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3820444074",
+    "id" : "926963D7",
+    "lastKnownWriteTime" : 1570494215,
+    "last_content_update" : 1570494215937,
+    "path" : "/storage/jonathan_fine/0062_mop_reactions/other_models/commands.R",
+    "project_path" : "commands.R",
+    "properties" : {
+        "marks" : "<:57,0\n>:65,-1",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
