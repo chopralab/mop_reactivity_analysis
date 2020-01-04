@@ -1,6 +1,6 @@
 # 2-Methoxy propylene (MOP) Reactivity Analysis
 
-This project holds the files of the paper entitled [Graph-based machine learning interprets and predicts diagnostic isomer-selective ion-molecule reactions using tandem mass spectrometry](https://chemrxiv.org/articles/Graph_Based_Machine_Learning_Interprets_Diagnostic_Isomer-Selective_Ion-Molecule_Reactions_in_Tandem_Mass_Spectrometry/11466183). It is divided in to two directories which hold the two type types of models described in this work: one based on quantum chemical proton affinity calculations (**QM**), and those based on graph-based machine learning (**ML**).
+This project holds the files of the paper entitled [Graph-based machine learning predicts and interprets diagnostic isomer-selective ion-molecule reactions using tandem mass spectrometry](https://chemrxiv.org/articles/Graph_Based_Machine_Learning_Interprets_Diagnostic_Isomer-Selective_Ion-Molecule_Reactions_in_Tandem_Mass_Spectrometry/11466183). It is divided in to two directories which hold the two type types of models described in this work: one based on quantum chemical proton affinity calculations (**QM**), and those based on graph-based machine learning (**ML**). Applications for such methods include identification of impurities and drug metabolities in complex mixtures.
 
 ## Quantum Mechanics (QM)
 
@@ -12,7 +12,7 @@ An isodesmic reaction is described as a reaction where the bonds broken and form
 
 #### Free energy cycle for the isodesmic reaction method
 
-In the below equations, the *f* superscript is used to denote a quantity that can be calculated using a **QM** methodology. This is equivalent to the free energy of formation for the given quantity. The *A* subscript describes a quantity for the analyte and *R* denotes a quantity where the *proton affinity* is known. The protonated forms of these compounds is notated with *AH+* and *RH+*, respectively. This known quantity is described by a *M* superscript. Similarly, the *C* superscript denotes a quantity calculated using **Density Functional Theory** (see next section for details).
+In the following equations, the *f* superscript is used to denote a quantity that can be calculated using a **QM** methodology. This is equivalent to the free energy of formation for the given quantity. The *A* subscript describes a quantity for the analyte and *R* denotes a quantity where the *proton affinity* is known. The protonated forms of these compounds is notated with *AH+* and *RH+*, respectively. This known quantity is described by a *M* superscript. Similarly, the *C* superscript denotes a quantity calculated using **Density Functional Theory** (see next section for details).
 
 ![Thermodynamic energy cycle](thermodynamic_free_cycle.svg)
 
