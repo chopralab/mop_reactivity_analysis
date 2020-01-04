@@ -5,48 +5,31 @@ use strict;
 
 my $literature_reference = shift;
 
-my $energy_1 = "";
-my $energy_2 = "";
+sub get_energy {
 
-while(<>) {
-    if ($_ =~ m/Sum of electronic and thermal Free Energies\s*=\s+(\S+)\s+/i) {
-        $energy_1 = $1;
+    my $e = "";
+
+    while(<>) {
+        if ($_ =~ m/Sum of electronic and thermal Free Energies\s*=\s+(\S+)\s+/i) {
+            $e = $1;
+        }
+
+        last if eof;
     }
 
-    last if eof;
+    return $e;
 }
 
-while(<>) {
-    if ($_ =~ m/Sum of electronic and thermal Free Energies\s*=\s+(\S+)\s+/) {
-        $energy_2 = $1;
-    }   
+my $reference_1 = get_energy();
+my $reference_2 = get_energy();
 
-    last if eof;
-}
+my $analyte_1 = get_energy();
+my $analyte_2 = get_energy();
 
-my $reference_1 = "";
-my $reference_2 = "";
+my $reference_affinity = 627.509 * ($reference_1 - $reference_2);
+my $error = $literature_reference - $reference_affinity;
 
-while(<>) {
-    if ($_ =~ m/Sum of electronic and thermal Free Energies\s*=\s+(\S+)\s+/i) {
-        $reference_1 = $1;
-    }
+my $analyte_affinity = 627.509 * ($analyte_1 - $analyte_2) + $error;
 
-    last if eof;
-}
-
-while(<>) {
-    if ($_ =~ m/Sum of electronic and thermal Free Energies\s*=\s+(\S+)\s+/) {
-        $reference_2 = $1;
-    }
-
-    last if eof;
-}
-
-my $reference_affinity = 627.509 * ($reference_2 - $reference_1);
-my $error = $reference_affinity - $literature_reference;
-
-my $prot_affinity = 627.509 * ($energy_2 - $energy_1 ) - $error;
-
-print "$prot_affinity\n";
+print "$analyte_affinity\n";
 
