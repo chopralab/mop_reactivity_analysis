@@ -1,6 +1,6 @@
 # 2-Methoxy propylene (MOP) Reactivity Analysis
 
-This project holds the files of the paper entitled [Graph-based machine learning predicts and interprets diagnostic isomer-selective ion-molecule reactions using tandem mass spectrometry](https://chemrxiv.org/articles/Graph_Based_Machine_Learning_Interprets_Diagnostic_Isomer-Selective_Ion-Molecule_Reactions_in_Tandem_Mass_Spectrometry/11466183). It is divided in to two directories which hold the two type types of models described in this work: one based on quantum chemical proton affinity calculations (**QM**), and those based on graph-based machine learning (**ML**). Applications for such methods include identification of impurities and drug metabolities in complex mixtures.
+This project holds the files of the paper entitled [Graph-based machine learning predicts and interprets diagnostic isomer-selective ion-molecule reactions using tandem mass spectrometry](https://chemrxiv.org/articles/Graph_Based_Machine_Learning_Interprets_Diagnostic_Isomer-Selective_Ion-Molecule_Reactions_in_Tandem_Mass_Spectrometry/11466183). It is divided in to two directories which hold the two type types of models described in this work: one based on quantum chemical proton affinity calculations (**QM**), and the other based on graph-based machine learning (**ML**). Applications for such methods include identification of impurities and drug metabolites in complex mixtures.
 
 ## Quantum Mechanics (QM)
 
@@ -18,7 +18,7 @@ In the following equations, the *f* superscript is used to denote a quantity tha
 
 ##### Performing the calculation
 
-The **Perl** script *calculate_proton_affinity_isodesmic.pl* can be used to perform this calculation. The arguments are as follows: the known proton affinity (in kCal/mol) of a reference analyte, the log file for the neutral reference analyte, the log file for the protonated reference analyte, the log file for the neutral analyte, and the log file for the protonated neutral analyte. The reference analyte should be protonated on the same atom as the analyte (for example ammonia should be used to calculate the proton affinity of an amine). An example invocation is given below:
+The **Perl** script *calculate_proton_affinity_isodesmic.pl* can be used to perform this calculation. The arguments are as follows: the known proton affinity (in kcal/mol) of a reference analyte, the log file for the neutral reference analyte, the log file for the protonated reference analyte, the log file for the neutral analyte, and the log file for the protonated neutral analyte. The reference analyte should be protonated on the same atom as the analyte (for example ammonia should be used to calculate the proton affinity of an amine). An example invocation is given below:
 
 ```bash
 perl calculate_proton_affinity_isodesmic.pl 204.0 ammonia.log ammonia_p.log 01.log 01_p.log
