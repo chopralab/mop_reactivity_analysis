@@ -1,15 +1,19 @@
 library(tidyverse)
 library(parallel)
+library(caret)
+library(cohen.kappa)
 
-fp0 <- read_csv("../train36_predict14/fp0/set_bits.csv") %>% mutate_if(is.character, as.logical)
-fp1 <- read_csv("../train36_predict14/fp1/set_bits.csv") %>% mutate_if(is.character, as.logical)
-fp2 <- read_csv("../train36_predict14/fp2/set_bits.csv") %>% mutate_if(is.character, as.logical)
-fp3 <- read_csv("../train36_predict14/fp3/set_bits.csv") %>% mutate_if(is.character, as.logical)
+fp0 <- read_csv("../train36_predict13/fp0/set_bits.csv") %>% mutate_if(is.character, as.logical)
+fp1 <- read_csv("../train36_predict13/fp1/set_bits.csv") %>% mutate_if(is.character, as.logical)
+fp2 <- read_csv("../train36_predict13/fp2/set_bits.csv") %>% mutate_if(is.character, as.logical)
+fp3 <- read_csv("../train36_predict13/fp3/set_bits.csv") %>% mutate_if(is.character, as.logical)
 
-read_csv("../train36_predict14/fp0/set_bits_test.csv") %>% mutate_all(as.logical)-> sb_test_fp0
-read_csv("../train36_predict14/fp1/set_bits_test.csv") %>% mutate_all(as.logical)-> sb_test_fp1
-read_csv("../train36_predict14/fp2/set_bits_test.csv") %>% mutate_all(as.logical)-> sb_test_fp2
-read_csv("../train36_predict14/fp3/set_bits_test.csv") %>% mutate_all(as.logical)-> sb_test_fp3
+read_csv("../train36_predict13/fp0/set_bits_test.csv") %>% mutate_all(as.logical)-> sb_test_fp0
+read_csv("../train36_predict13/fp1/set_bits_test.csv") %>% mutate_all(as.logical)-> sb_test_fp1
+read_csv("../train36_predict13/fp2/set_bits_test.csv") %>% mutate_all(as.logical)-> sb_test_fp2
+read_csv("../train36_predict13/fp3/set_bits_test.csv") %>% mutate_all(as.logical)-> sb_test_fp3
+
+read_csv("../train36_predict13/fp0/test.csv") %>% select(-fingerprint) -> test
 
 test_model <- function(fp, sb, method = "regLogistic") {
   mclapply(seq(0.1, 0.9, 0.1), mc.cores = 9, function(X) {
@@ -26,7 +30,7 @@ test_model <- function(fp, sb, method = "regLogistic") {
     tibble(method = method, cutoff = X, kappa = model$results$Kappa %>% max(),
       c01 = pred[01], c02 = pred[02], c03 = pred[03], c04 = pred[04], c05 = pred[05],
       c06 = pred[06], c07 = pred[07], c08 = pred[08], c09 = pred[09], c10 = pred[10],
-      c11 = pred[11], c12 = pred[12], c13 = pred[13], c14 = pred[14],
+      c11 = pred[11], c12 = pred[12], c13 = pred[13], 
       self_score = pred_self
     )
   }) %>% bind_rows()
@@ -93,3 +97,17 @@ process_caret_data <- function(input) {
     rbind(input_res) %>%
     arrange(fp, compound)
 }
+
+reglog %>% process_caret_data() %>% write_csv("reglog.csv")
+glm %>% process_caret_data() %>% write_csv("glm.csv")
+knn %>% process_caret_data() %>% write_csv("knn.csv")
+pls %>% process_caret_data() %>% write_csv("pls.csv")
+
+bind_rows(
+  process_dt_data("../train36_predict13/fp0/results.csv") %>% mutate(fp = "fp0"),
+  process_dt_data("../train36_predict13/fp1/results.csv") %>% mutate(fp = "fp1"),
+  process_dt_data("../train36_predict13/fp2/results.csv") %>% mutate(fp = "fp2"),
+  process_dt_data("../train36_predict13/fp3/results.csv") %>% mutate(fp = "fp3"),
+) %>% arrange(fp, compound) %>% write_csv("dt.csv")
+
+cohen.kappa(data.frame(test$yield == 1.0, test$proton_affinity < -214.42))$kappa

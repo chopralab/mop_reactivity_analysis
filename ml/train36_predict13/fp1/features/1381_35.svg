@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<svg version='1.1' baseProfile='full'
+              xmlns='http://www.w3.org/2000/svg'
+                      xmlns:rdkit='http://www.rdkit.org/xml'
+                      xmlns:xlink='http://www.w3.org/1999/xlink'
+                  xml:space='preserve'
+width='150px' height='150px' >
+<rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect>
+<ellipse cx='86.5254' cy='78.8961' rx='13.8492' ry='13.8492' style='fill:#9999E5;fill-rule:evenodd;stroke:#9999E5;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path d='M 92.4914,82.4113 124.141,28.6954' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path d='M 80.5594,75.3808 112.209,21.6649' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path d='M 86.5254,78.8961 21.0996,85.1876' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path d='M 86.5254,78.8961 128.9,126.804' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<text x='118.175' y='26.7359' style='font-size:15px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#7F7F7F' ><tspan>*</tspan></text>
+<text x='14.0948' y='93.0244' style='font-size:15px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#7F7F7F' ><tspan>*</tspan></text>
+<text x='128.9' y='138.264' style='font-size:15px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#7F7F7F' ><tspan>*</tspan></text>
+</svg>

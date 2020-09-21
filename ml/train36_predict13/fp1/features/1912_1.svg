@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<svg version='1.1' baseProfile='full'
+              xmlns='http://www.w3.org/2000/svg'
+                      xmlns:rdkit='http://www.rdkit.org/xml'
+                      xmlns:xlink='http://www.w3.org/1999/xlink'
+                  xml:space='preserve'
+width='150px' height='150px' >
+<rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect>
+<ellipse cx='75' cy='83.741' rx='7.22488' ry='7.22488' style='fill:#9999E5;fill-rule:evenodd;stroke:#9999E5;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path d='M 15.253,81.0318 44.0539,65.1047' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path d='M 44.0539,65.1047 75,83.741' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path d='M 106.613,66.259 134.747,83.2021' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path d='M 106.613,66.259 75,83.741' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<text x='9.62978' y='88.6073' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#7F7F7F' ><tspan>*</tspan></text>
+<text x='134.747' y='90.9161' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#7F7F7F' ><tspan>*</tspan></text>
+</svg>

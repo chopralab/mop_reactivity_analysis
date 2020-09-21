@@ -13,7 +13,7 @@ results = results |> DataFrame
 if size(test_matrix,2) == 6
     names!(results, [:c1, :c2, :c3, :c4, :c5, :c6, :self_score, :kappa])
 else
-    names!(results, [:c01, :c02, :c03, :c04, :c05, :c06, :c07, :c08, :c09, :c10, :c11, :c12, :c13, :c14, :self_score, :kappa])
+    names!(results, [:c01, :c02, :c03, :c04, :c05, :c06, :c07, :c08, :c09, :c10, :c11, :c12, :c13, :self_score, :kappa])
 end
 
 results[:cutoff] = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
